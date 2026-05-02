@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-blue: #3b82f6;
+  --color-brand-purple: #8b5cf6;
+  --color-bg-deep: #050506;
+}
+
+@layer base {
+  body {
+    @apply bg-bg-deep text-white antialiased selection:bg-brand-blue selection:text-white font-sans overflow-x-hidden;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-bg-deep;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-white/10 rounded-full hover:bg-white/20;
+  }
+
+  /* Print Styles for PDF Download */
+  @media print {
+    .ml-20 { margin-left: 0 !important; }
+    aside, .fixed, button, header, footer, #projects button, .glass-card button { display: none !important; }
+    body { background: white !important; color: black !important; }
+    .glass-card, .glass { background: white !important; order: 1px solid #eee !important; color: black !important; box-shadow: none !important; backdrop-filter: none !important; }
+    .text-gradient { background: none !important; -webkit-background-clip: initial !important; background-clip: initial !important; color: black !important; -webkit-text-fill-color: initial !important; font-weight: 900 !important; }
+    section { page-break-inside: avoid; margin-bottom: 2rem !important; py: 1rem !important; }
+    .container { max-width: 100% !important; width: 100% !important; padding: 0 !important; }
+    p, span, h1, h2, h3, h4 { color: black !important; }
+    #hero { min-height: auto !important; padding-top: 0 !important; }
+    #hero h1 { font-size: 3rem !important; line-height: 1 !important; }
+  }
+}
+
+.glass {
+  @apply bg-white/5 border border-white/10 backdrop-blur-xl;
+}
+
+.glass-card {
+  @apply bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl p-6 transition-all duration-300;
+}
+
+.glass-card:hover {
+  @apply border-brand-blue/30 bg-white/10;
+}
+
+.text-gradient {
+  @apply text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-brand-purple;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
